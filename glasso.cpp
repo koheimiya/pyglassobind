@@ -7,16 +7,17 @@
 //  Copyright © 2017年 Kohei Miyaguchi. All rights reserved.
 //
 
-#include<iostream>
+#include <iostream>
 #include <Eigen/Core>
 #include <Eigen/LU>
 #include <Eigen/Eigenvalues>
 #include <Eigen/Geometry>
-#include<pybind11/pybind11.h>
-#include<pybind11/eigen.h>
-#include<pybind11/functional.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/eigen.h>
+#include <pybind11/functional.h>
 
 namespace py = pybind11;
+using namespace pybind11::literals;
 
 struct GraphicalLassoResult {
     Eigen::MatrixXd Theta, Sigma;
@@ -207,7 +208,8 @@ PYBIND11_PLUGIN(glassobind) {
         .def_readonly("theta", &GraphicalLassoResult::Theta)
         .def_readonly("sigma", &GraphicalLassoResult::Sigma)
         .def_readonly("converged", &GraphicalLassoResult::converged);
-    m.def("glasso", &graphicalLasso, "performs graphical lasso");
+    m.def("glasso", &graphicalLasso, "performs graphical lasso",
+          "emp_cov"_a, "lambda"_a, "sigma_init"_a, "theta_init"_a, "tol"_a, "iter_max"_a, "verbose"_a, "eps"_a);
     m.def("test_glasso", &test_glasso, "test function");
     return m.ptr();
 }

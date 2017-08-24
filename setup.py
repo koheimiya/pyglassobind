@@ -4,7 +4,7 @@ import sys
 import setuptools
 
 __version__ = '0.0.1'
-__eigen_lib_dir__ = '-I/usr/local/Cellar/eigen/3.3.3/include/eigen3'
+__eigen_lib_dir__ = '/usr/local/Cellar/eigen/3.3.4/include/eigen3'
 
 
 class get_pybind_include(object):
@@ -80,7 +80,7 @@ class BuildExt(build_ext):
         ct = self.compiler.compiler_type
         opts = self.c_opts.get(ct, [])
         opts.append('-O2')
-        opts.append(__eigen_lib_dir__)
+        opts.append('-I' + __eigen_lib_dir__)
         if ct == 'unix':
             opts.append('-DVERSION_INFO="%s"' % self.distribution.get_version())
             opts.append(cpp_flag(self.compiler))
