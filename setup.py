@@ -2,9 +2,12 @@ from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
+import os
 
 __version__ = '0.0.1'
-__eigen_lib_dir__ = '/usr/local/Cellar/eigen/3.3.4/include/eigen3'
+__eigen_lib_dir__ = os.getenv('EIGEN_PATH')
+if __eigen_lib_dir__ is None:
+    raise RuntimeError('EIGEN_PATH is not set.')
 
 
 class get_pybind_include(object):

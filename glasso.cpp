@@ -209,7 +209,7 @@ PYBIND11_PLUGIN(glassobind) {
         .def_readonly("sigma", &GraphicalLassoResult::Sigma)
         .def_readonly("converged", &GraphicalLassoResult::converged);
     m.def("glasso", &graphicalLasso, "performs graphical lasso",
-          "emp_cov"_a, "lambda"_a, "sigma_init"_a, "theta_init"_a, "tol"_a, "iter_max"_a, "verbose"_a, "eps"_a);
+          "emp_cov"_a, "lmb"_a, "sigma_init"_a, "theta_init"_a, "tol"_a, "iter_max"_a, "verbose"_a, "eps"_a);
     m.def("test_glasso", &test_glasso, "test function");
     return m.ptr();
 }
